@@ -7,11 +7,12 @@ import Script from "next/script";
 declare global {
   interface Window {
     turnstile?: {
-      reset?: (widget?: any) => void;
-      render?: (...args: any[]) => any;
+      render: (el: HTMLElement, options: any) => string;
+      reset: (widgetId?: string) => void;
     };
   }
 }
+
 
 type Status = "idle" | "submitting" | "success" | "error";
 

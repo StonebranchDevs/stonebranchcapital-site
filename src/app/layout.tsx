@@ -1,5 +1,6 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import RevealInit from "@/components/RevealInit";
 
@@ -15,10 +16,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en">
       <body>
-        {children}
+        {/* Cloudflare Turnstile (needed for Contact page spam check) */}
+        <Script
+          src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+          strategy="afterInteractive"
+        />
+
+        {/* Scroll-reveal initializer */}
         <RevealInit />
+
+        {children}
       </body>
     </html>
   );

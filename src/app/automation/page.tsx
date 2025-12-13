@@ -21,8 +21,8 @@ export default function Automation() {
                   everything.
                 </h1>
                 <p className="section-subtitle">
-                  We help small and service-based businesses capture more leads, respond faster,
-                  book more work, and cut repetitive admin tasks — without turning your operation
+                  We help small and service-based businesses improve lead intake, response consistency,
+                  scheduling flow, and reduce repetitive admin tasks — without turning your operation
                   into something you don’t recognize.
                 </p>
 
@@ -38,7 +38,8 @@ export default function Automation() {
 
                 <p className="hero-automation-footnote">
                   Built for real operators — especially small and veteran-owned businesses — who
-                  need practical help, not buzzwords.
+                  need practical help, not buzzwords. Privacy-first by default — we minimize data, 
+                  use it only for approved purposes, and choose tools deliberately.
                 </p>
               </div>
 
@@ -70,7 +71,7 @@ export default function Automation() {
               <h2 className="section-title">Owners who want systems, not more chaos.</h2>
               <p className="section-subtitle">
                 We’re a fit if you’re already doing good work — you just need better ways to
-                capture opportunities, communicate with customers, and keep things moving
+                handle inquiries, communicate with customers, and keep things moving -
                 without living in your inbox or phone.
               </p>
             </div>
@@ -117,8 +118,8 @@ export default function Automation() {
                 Practical automations that actually help you run the business.
               </h2>
               <p className="section-subtitle">
-                We focus on the kinds of workflows that move the needle: more booked jobs,
-                fewer no-shows, and less “sorry, I missed your message” moments.
+                We focus on the workflows that reduce missed messages, tighten follow-up,
+                and make scheduling more consistent — so the business runs smoother day to day.
               </p>
             </div>
 
@@ -127,7 +128,7 @@ export default function Automation() {
                 <div className="card-tag">Leads &amp; inquiries</div>
                 <h3 className="card-title">24/7 lead capture &amp; response</h3>
                 <p className="card-body">
-                  Capture leads from your website, forms, or ads and send instant, professional
+                  Route inquiries from your website or forms into consistent, professional
                   responses — even if you’re on a job, with family, or asleep.
                 </p>
                 <ul className="card-list">
@@ -155,8 +156,8 @@ export default function Automation() {
                 <div className="card-tag">Follow-up &amp; reviews</div>
                 <h3 className="card-title">Stay in touch after the job is done</h3>
                 <p className="card-body">
-                  Build a steady flow of reviews and repeat work without manually chasing people
-                  down.
+                  Set up consistent post-service follow-up and review requests without manually
+                  chasing people down.
                 </p>
                 <ul className="card-list">
                   <li>Automatic “thank you” messages after service</li>
@@ -201,7 +202,8 @@ export default function Automation() {
               <ol className="step-list">
                 <li>
                   <strong>Quick conversation.</strong> We talk through what you do, how customers
-                  currently find and book you, and what’s falling through the cracks.
+                  currently find and book you, and what’s falling through the cracks. If it’s not a fit, 
+                  we’ll say so and point you toward the simplest next step.
                 </li>
                 <li>
                   <strong>Map the workflows.</strong> We outline a few specific flows (like “new

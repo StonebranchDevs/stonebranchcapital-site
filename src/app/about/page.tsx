@@ -19,8 +19,8 @@ export default function AboutPage() {
               <p className="section-subtitle">
                 Stonebranch Capital LLC is a small, intentional parent company based in South
                 Carolina. We exist to give our own brands—and select partner businesses—a stable
-                operational foundation, modern customer experience, and the systems they need to
-                grow.
+                operational foundation, modern customer experience, and systems that support
+                sustainable growth.
               </p>
             </div>
           </div>
@@ -61,13 +61,15 @@ export default function AboutPage() {
                   businesses where access to capital, time, and operational support is limited.
                   For select partnerships, we use flexible models—including revenue-share or
                   phased support—so we can align with long-term success instead of loading
-                  founders with up-front cost.
+                  founders with up-front cost. Any flexible arrangement is scoped, documented, 
+                  and approved deliberately so it stays fair and sustainable for both sides.
+
                 </p>
                 <p className="card-body about-fine-print">
                   <strong>Important:</strong> Stonebranch Capital LLC is <em>not</em> a lender or
                   funding company. We do not offer loans, lines of credit, or financial products.
-                  Our role is to help businesses gain and retain customers, improve operations,
-                  and build stable revenue—not to sell financing.
+                  Our role is to help businesses improve operations, strengthen customer communication,
+                  and build more consistent workflows - not to sell financing.
                 </p>
               </article>
             </div>
@@ -108,8 +110,8 @@ export default function AboutPage() {
                 <div className="card-tag">02</div>
                 <h3 className="card-title">Automation &amp; business systems</h3>
                 <p className="card-body">
-                  We help local businesses modernize how they capture leads, book work, and
-                  communicate. That includes AI-powered intake, follow-up, and internal workflows.
+                  We help local businesses modernize how they handle lead intake, scheduling, and customer communication.
+                 That includes AI-powered intake, follow-up, and internal workflows.
                 </p>
                 <ul className="card-list">
                   <li>Lead capture &amp; response automation</li>
@@ -143,7 +145,7 @@ export default function AboutPage() {
               <h2 className="section-title">Principles that guide every venture.</h2>
               <p className="section-subtitle">
                 Whether we’re working on our own brands or supporting someone else’s, we try to
-                operate the same way: clear, disciplined, and focused on the long term.
+                operate the same way: clear, disciplined, and focused on the long term — with fit, ethics, and privacy as non-negotiables.
               </p>
             </div>
 

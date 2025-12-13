@@ -38,7 +38,8 @@ export default function HomePage() {
 
                 <div className="hero-footnote">
                   Built in South Carolina. Focused on practical systems, clean operations,
-                  and long-term stability.
+                  and long-term stability — only taking on work we can stand behind.
+                  Privacy-first by default. We only use data for the work you approve.
                 </div>
               </div>
 
@@ -87,8 +88,8 @@ export default function HomePage() {
                 <div className="card-tag">New &amp; growing</div>
                 <h3 className="card-title">AI Automation for Local Business</h3>
                 <p className="card-body">
-                  Done-for-you automations that help service businesses capture more leads,
-                  book more jobs, and cut repetitive admin work.
+                  Done-for-you automations that improve speed, consistency, and follow-up
+                  across lead intake, scheduling, and customer communication — when there's a clear fit.
                 </p>
                 <ul className="card-list">
                   <li>24/7 lead response &amp; intake</li>

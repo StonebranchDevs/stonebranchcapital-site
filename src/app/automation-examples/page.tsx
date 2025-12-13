@@ -271,8 +271,9 @@ export default function AutomationExamplesPage() {
               </h1>
               <p className="section-subtitle" style={{ maxWidth: "46rem" }}>
                 These are representative workflows using simulated data. The goal is to
-                show you what changes in day-to-day operations: fewer missed leads, fewer
-                no-shows, better follow-up, and less manual admin.
+                show what automation can look like when it’s a good fit: reducing missed
+                messages, improving follow-up consistency, and cutting repetitive admin —
+                without turning your business into a black box.
               </p>
 
               <div style={{ marginTop: "1rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
@@ -283,6 +284,15 @@ export default function AutomationExamplesPage() {
                   Talk to Stonebranch
                 </Link>
               </div>
+            </div>
+            <div className="card" style={{ marginTop: "1.25rem" }}>
+              <div className="card-tag">How we build (the guardrails)</div>
+              <ul className="card-list">
+                <li><strong>Fit-first:</strong> We only recommend automations that match your workflow and capacity.</li>
+                <li><strong>Human-in-the-loop:</strong> You stay in control — critical steps can require review/approval.</li>
+                <li><strong>Data-minimal:</strong> We use only what’s needed for the agreed purpose, nothing “just in case.”</li>
+                <li><strong>Privacy-minded:</strong> No training on your data without explicit consent. Access is least-privilege.</li>
+              </ul>
             </div>
           </div>
         </section>
@@ -401,7 +411,7 @@ export default function AutomationExamplesPage() {
                   </ul>
                   <p className="card-body" style={{ marginTop: "0.6rem" }}>
                     The point isn’t buzzwords — it’s reducing the number of things that can slip
-                    through the cracks.
+                    through the cracks, while keeping a human in control of anything that's sensitive.
                   </p>
                 </div>
               </div>
@@ -543,8 +553,8 @@ export default function AutomationExamplesPage() {
               </div>
 
               <p className="card-body" style={{ marginTop: "0.9rem", opacity: 0.9 }}>
-                <strong>Transparency:</strong> Examples shown use simulated data. We design each workflow around your real
-                process, tools, and customer expectations.
+                <strong>Transparency:</strong> Examples shown use simulated data. In real builds, we minimize data, use approved tools,
+                and design around your actual process and customer expectations — with clear consent and human oversight where it matters.
               </p>
             </div>
           </div>

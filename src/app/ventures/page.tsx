@@ -18,8 +18,8 @@ export default function Ventures() {
                 A small portfolio of ventures built slowly, on purpose.
               </h1>
               <p className="section-subtitle">
-                Stonebranch Capital develops a focused set of ventures and operating
-                divisions. Some are live and growing, others are in development or early
+                Stonebranch Capital oversees a focused set of operating
+                divisions and subsidiary ventures. Some are live and growing, others are in development or early
                 exploration—but all share the same foundation: systems, clean operations,
                 and long-term thinking.
               </p>
@@ -30,107 +30,126 @@ export default function Ventures() {
         <section className="section ventures-band">
           <div className="container">
             <div className="card-grid ventures-grid">
+
+              {/* DIVISION I — SERVICES (Subsidiaries) */}
               <article className="card division-card">
                 <div className="card-tag">Division I</div>
-                <h2 className="card-title">Residential &amp; local services</h2>
+                <h2 className="card-title">Services Division</h2>
                 <div className="division-status">
                   <span className="division-status-dot"></span>
-                  <span className="division-status-text">
-                    Status: Active &amp; growing
-                  </span>
+                  <span className="division-status-text">Status: Active &amp; growing</span>
                 </div>
+
                 <p className="card-body">
-                  This division focuses on route-based, residential services built around
-                  recurring revenue and a clean, modern customer experience.
+                  The Services Division exists to build and operate practical, route-based service
+                  businesses with clean operations, consistent communication, and a professional customer
+                  experience. We prioritize reliability over hype and systems over improvisation — so the
+                  business still runs well on hard days, not just ideal ones.
                 </p>
+
                 <ul className="card-list">
                   <li>
-                    <strong>Southern Elite Bin Cleaning</strong> — residential trash bin
-                    cleaning &amp; exterior wash services with a focus on routes,
-                    predictable schedules, and polished branding.
+                    <strong>Southern Elite Bin Cleaning</strong> — an active subsidiary focused on
+                    recurring residential bin cleaning and exterior wash services, delivered through
+                    predictable routes, scheduling discipline, and a polished brand experience.
                   </li>
                   <li>
-                    <strong>Southern Elite Property Inspections</strong> — a developing
-                    concept for inspections and reporting designed to be clear,
-                    straightforward, and easy for buyers and owners to act on.
+                    <strong>Operating playbooks</strong> — scheduling, reminders, customer messaging,
+                    service documentation, and quality controls shared across service ventures as they come
+                    online.
                   </li>
                   <li>
-                    Shared systems across ventures for scheduling, reminders, and customer
-                    communication.
+                    <strong>New service concepts</strong> — explored deliberately, evaluated for fit and
+                    risk, and launched only when they meet Stonebranch’s standards for clarity,
+                    sustainability, and customer trust.
                   </li>
                 </ul>
+
                 <Link href="/about" className="card-link">
-                  How we think about service ventures →
+                  How we build durable service ventures →
                 </Link>
               </article>
 
+              {/* DIVISION II — AUTOMATION (Client-facing under Stonebranch) */}
               <article className="card division-card">
                 <div className="card-tag">Division II</div>
-                <h2 className="card-title">Automation &amp; business systems</h2>
+                <h2 className="card-title">Automation &amp; Systems Division</h2>
                 <div className="division-status division-status-active">
                   <span className="division-status-dot"></span>
                   <span className="division-status-text">Status: Active</span>
                 </div>
+
                 <p className="card-body">
-                  This division focuses on building and implementing the systems that help
-                  local businesses capture more leads, book more work, and reduce
-                  repetitive admin tasks.
+                  The Automation &amp; Systems Division helps small businesses modernize key workflows —
+                  especially lead intake, follow-up, scheduling, and internal coordination. We take a
+                  fit-first approach and only build what we can stand behind. Automations are designed to
+                  be understandable, monitored, and maintainable — not mysterious black boxes.
                 </p>
+
                 <ul className="card-list">
                   <li>
-                    <strong>AI automation for local business</strong> — done-for-you
-                    automations for lead intake, follow-up, scheduling, reminders, and
-                    review building.
+                    <strong>AI-assisted intake &amp; follow-up</strong> — structured workflows for inquiry
+                    handling, routing, and response consistency, with appropriate human oversight where
+                    impact is material.
                   </li>
                   <li>
-                    Infrastructure that can be used within Stonebranch-owned ventures or
-                    as a service for outside businesses.
+                    <strong>Systems implementation</strong> — scheduling flows, reminder sequences, review
+                    &amp; reputation systems, and internal handoffs designed around clarity and real-world
+                    execution.
                   </li>
                   <li>
-                    Emphasis on clear reporting, human oversight, and systems that owners
-                    actually understand and can trust.
+                    <strong>Privacy-first by default</strong> — we minimize data, use it only for approved
+                    purposes, and select tools deliberately. No selling data. No silent scope creep.
                   </li>
                 </ul>
+
                 <Link href="/automation" className="card-link">
                   Explore automation services →
                 </Link>
               </article>
 
+              {/* DIVISION III — VENTURE STUDIO / INTERNAL TOOLS */}
               <article className="card division-card">
                 <div className="card-tag">Division III</div>
-                <h2 className="card-title">Internal tools &amp; future initiatives</h2>
+                <h2 className="card-title">Venture Studio &amp; Internal Tools</h2>
                 <div className="division-status division-status-explore">
                   <span className="division-status-dot"></span>
-                  <span className="division-status-text">
-                    Status: Exploration &amp; early development
-                  </span>
+                  <span className="division-status-text">Status: Exploration &amp; early development</span>
                 </div>
+
                 <p className="card-body">
-                  Some of the systems we build for our own use become internal tools—and
-                  sometimes those tools evolve into stand-alone offerings or help shape new
-                  ventures.
+                  The Venture Studio is where Stonebranch turns lessons from operations into reusable
+                  systems — and where new concepts are explored with discipline. This division exists to
+                  reduce “starting from zero” while avoiding random experimentation. Anything that moves
+                  forward is documented, reviewed for risk, and aligned with Stonebranch governance before
+                  it becomes real.
                 </p>
+
                 <ul className="card-list">
                   <li>
-                    Frameworks for operations, routing, scheduling, and customer
-                    communication across multiple brands.
+                    <strong>Internal tooling</strong> — dashboards, SOP-backed workflows, operational
+                    templates, and utilities that improve execution across ventures.
                   </li>
                   <li>
-                    Internal dashboards or utilities that may one day be packaged as
-                    software or productized services.
+                    <strong>Reusable frameworks</strong> — patterns for routing, scheduling, customer
+                    communication, documentation, and reporting that can be inherited by new ventures.
                   </li>
                   <li>
-                    Space for future projects that fit our core focus: systems, service,
-                    and sustainable growth.
+                    <strong>Deliberate incubation</strong> — future products or ventures are evaluated for
+                    fit, ethics, data handling, and sustainability before launch. Exploration is not a
+                    promise of release.
                   </li>
                 </ul>
+
                 <Link href="/about" className="card-link">
-                  Learn more about our approach →
+                  Learn how we explore new initiatives →
                 </Link>
               </article>
+
             </div>
           </div>
         </section>
+
 
         <section className="section">
           <div className="container">
@@ -141,8 +160,8 @@ export default function Ventures() {
                 Stonebranch isn’t trying to build as many brands as possible. Instead, we’re
                 building a small ecosystem where ventures can share systems, standards, and
                 lessons learned. A scheduling flow refined in one business can later support
-                another. An automation built for internal use can become part of an
-                automation service offering.
+                another. An automation built for internal use may later inform our service offerings
+                when it's proven, documented, and a clear fit.
               </p>
               <p className="card-body">
                 This approach keeps us disciplined: new ideas are filtered through what we
@@ -161,7 +180,8 @@ export default function Ventures() {
               <p className="section-subtitle">
                 If you’re a small or veteran-owned business interested in systems,
                 automation, or long-term support—not just one-off projects—you’re welcome
-                to reach out and see if there’s a fit.
+                to reach out and see if there’s a fit. We keep the first conversation simple: 
+                understand the situation, confirm fit, and outline a responsible next step.
               </p>
               <p className="card-body">
                 Email{" "}

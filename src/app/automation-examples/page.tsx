@@ -298,7 +298,7 @@ export default function AutomationExamplesPage() {
               </p>
             </div>
 
-            <div className="card-grid" style={{ gridTemplateColumns: "repeat(4, minmax(0, 1fr))" }}>
+            <div className="card-grid ae-scenario-grid">
               {scenarios.map((s) => {
                 const selected = s.id === activeScenario;
                 return (

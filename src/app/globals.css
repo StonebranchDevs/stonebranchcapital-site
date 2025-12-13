@@ -875,14 +875,20 @@ html.js .reveal.visible {
 @media (max-width: 640px) {
   /* Slightly more breathing room at top under sticky header */
   .site-header-inner {
-    padding: 0.75rem 0;
-    gap: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
+
 
   /* Make logo stack nicer */
   .logo {
-    width: 100%;
+    width: auto;
+    flex: 1;
+    min-width: 0; /* allows text to shrink instead of wrapping */
   }
+
 
   .logo-text-main {
     font-size: 0.95rem;
@@ -1110,5 +1116,90 @@ html.js .reveal.visible {
 
   .nav-links-mobile .nav-btn {
     width: fit-content;
+  }
+}
+
+/* About page – Operating Principles grid (responsive + no overflow) */
+.operate-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+@media (max-width: 900px) {
+  .operate-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .operate-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Prevent long words from busting cards on mobile */
+.card,
+.card-body,
+.card-title {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Automation Examples – scenario picker responsive grid */
+.ae-scenario-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .ae-scenario-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .ae-scenario-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ===== Contact form: mobile containment + nicer button ===== */
+@media (max-width: 640px) {
+  /* Put padding BACK on the card on mobile */
+  .contact-form-card {
+    padding: 1rem !important;          /* restores card padding */
+    overflow: hidden;                  /* prevents any visual overflow */
+  }
+
+  /* Make every layout wrapper respect the card width */
+  .contact-form,
+  .form-row,
+  .form-field {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Hard-force inputs/textarea to stay inside */
+  .form-field input,
+  .form-field textarea {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+  }
+
+  /* Button: smaller + centered (instead of huge full-width) */
+  .form-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+    max-width: 360px;                  /* smaller “SaaS” button */
+    margin: 0 auto;
+  }
+
+  .form-note {
+    text-align: center;
+    max-width: 28rem;
   }
 }

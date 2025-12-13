@@ -148,9 +148,7 @@ export default function AboutPage() {
             </div>
 
             <div
-              className="card-grid"
-              style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "1.4rem" }}
-            >
+              className="card-grid operate-grid">
               <article className="card">
                 <h3 className="card-title">Clarity over complexity</h3>
                 <p className="card-body">

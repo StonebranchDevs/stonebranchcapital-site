@@ -478,6 +478,27 @@ button.btn:focus-visible {
   color: #e5e7eb;
 }
 
+.footer-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.footer-submeta {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.footer-submeta a {
+  color: #9ca3af;
+  text-decoration: none;
+}
+
+.footer-submeta a:hover {
+  color: #e5e7eb;
+}
+
+
 /* ===== Page bands (About/Ventures/Automation) ===== */
 .section-band {
   padding-top: 3.4rem;

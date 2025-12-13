@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 
 export default function SiteFooter() {
@@ -9,10 +7,20 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="container">
         <div className="footer-inner">
-          <div>
-            © {year} Stonebranch Capital LLC. All rights reserved.
+          {/* Left: Company info */}
+          <div className="footer-meta">
+            <div>
+              © <span suppressHydrationWarning>{year}</span> Stonebranch Capital LLC
+            </div>
+            <div className="footer-submeta">
+              Charleston, SC ·{" "}
+              <a href="mailto:contact@stonebranchcapital.com">
+                contact@stonebranchcapital.com
+              </a>
+            </div>
           </div>
 
+          {/* Right: Navigation */}
           <div className="footer-links">
             <Link href="/">Home</Link>
             <Link href="/about">About</Link>

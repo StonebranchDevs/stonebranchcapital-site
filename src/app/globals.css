@@ -853,3 +853,214 @@ html.js .reveal.visible {
   margin: 0 auto;
   align-items: stretch; /* keeps the two cards same height */
 }
+
+
+/* =========================================================
+   Mobile Optimization Patch (DESKTOP UNCHANGED)
+   Paste at END of globals.css
+   ========================================================= */
+
+/* 1) Touch devices: remove hover-lift/jitter */
+@media (hover: none) and (pointer: coarse) {
+  .card:hover {
+    transform: none;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.9);
+    border-color: rgba(30, 64, 175, 0.6);
+    background: radial-gradient(circle at top, #0b1220, #020617 65%);
+  }
+
+  .btn-primary:hover,
+  .btn-outline:hover,
+  .nav-btn:hover,
+  .nav-links a:hover {
+    transform: none;
+  }
+}
+
+/* 2) Small screens: tighten layout + improve tap targets */
+@media (max-width: 640px) {
+  /* Slightly more breathing room at top under sticky header */
+  .site-header-inner {
+    padding: 0.75rem 0;
+    gap: 0.75rem;
+  }
+
+  /* Make logo stack nicer */
+  .logo {
+    width: 100%;
+  }
+
+  .logo-text-main {
+    font-size: 0.95rem;
+  }
+
+  .logo-text-sub {
+    font-size: 0.8rem;
+  }
+
+  /* Nav: make it feel like a mobile "chip row" */
+  .nav-links {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.6rem 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  .nav-links a {
+    padding: 0.45rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    opacity: 1; /* mobile readability */
+  }
+
+  .nav-links a::after {
+    display: none; /* underline is cramped on mobile chips */
+  }
+
+  .nav-active {
+    border-color: rgba(191, 219, 254, 0.85);
+    background: rgba(30, 64, 175, 0.18);
+  }
+
+  /* Buttons: bigger tap targets */
+  .btn,
+  .nav-btn {
+    min-height: 44px; /* Apple HIG tap target */
+  }
+
+  /* Optional: on mobile, make CTA rows feel “stacked SaaS” */
+  .hero-cta-row,
+  .hero-automation-cta-row,
+  .hero-contact-cta-row {
+    gap: 0.7rem;
+  }
+
+  .hero-cta-row .btn,
+  .hero-automation-cta-row .btn,
+  .hero-contact-cta-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Hero: reduce top/bottom padding so content shows faster */
+  .hero {
+    padding: 2.2rem 0 2.4rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.05rem, 8.2vw, 2.6rem);
+    line-height: 1.12;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  /* Hero image: keep it “card-like”, not huge */
+  .hero-media {
+    border-radius: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-media img {
+    aspect-ratio: 16 / 10;
+    height: auto;
+  }
+
+  /* Section spacing: less vertical bloat */
+  .section {
+    padding: 0 0 2.4rem;
+  }
+
+  .section-header {
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title {
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-size: 0.98rem;
+    max-width: 100%;
+  }
+
+  /* Cards: slightly tighter padding */
+  .card {
+    padding: 1.05rem 1.05rem;
+    border-radius: 1.05rem;
+  }
+
+  .card-title {
+    font-size: 1.15rem;
+  }
+
+  .card-body {
+    font-size: 0.98rem;
+  }
+
+  .card-list li {
+    font-size: 0.92rem;
+  }
+
+  /* About Mission/Vision grid: ensure clean stack on phones */
+  .about-two-col {
+    grid-template-columns: 1fr !important;
+    max-width: 100% !important;
+  }
+
+  /* Automation + Contact hero panels: prevent weird side gaps */
+  .hero-automation-panel,
+  .hero-contact-panel {
+    width: 100%;
+  }
+
+  /* Contact form: make it feel premium on mobile */
+  .contact-form-card {
+    padding: 0; /* card already has padding */
+  }
+
+  .form-field input,
+  .form-field textarea {
+    font-size: 16px; /* prevents iOS zoom on focus */
+    padding: 0.7rem 0.85rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+
+  /* Turnstile: keep from squishing */
+  .cf-turnstile {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+/* 3) Mid mobile / small tablets: cleaner grids */
+@media (max-width: 768px) {
+  /* Tighter container padding */
+  .container {
+    padding: 0 1.05rem;
+  }
+
+  /* Automation examples scenario picker: 2 columns instead of 4 */
+  .automation-examples-page .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  /* Automation examples scenario picker: 1 column on small phones */
+  .automation-examples-page .card-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

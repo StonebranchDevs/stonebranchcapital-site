@@ -525,13 +525,10 @@ button.btn:focus-visible {
 
 
 /* ===== Automation page layout ===== */
-body.automation-page .hero-automation {
+.automation-page .hero-automation {
   padding-top: 6rem; /* single source of truth */
 }
 
-.hero-automation {
-  padding-top: 6rem;
-}
 
 .hero-automation-inner {
   display: grid;
@@ -580,13 +577,10 @@ body.automation-page .hero-automation {
 }
 
 /* ===== Contact page layout ===== */
-body.contact-page .hero-contact {
+.contact-page .hero-contact {
   padding-top: 6rem; /* single source of truth */
 }
 
-.hero-contact {
-  padding-top: 6rem;
-}
 
 .hero-contact-inner {
   display: grid;

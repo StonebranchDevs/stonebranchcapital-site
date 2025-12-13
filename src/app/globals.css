@@ -848,13 +848,20 @@ html.js .reveal.visible {
   align-items: stretch; /* keeps the two cards same height */
 }
 
-
 /* =========================================================
    Mobile Optimization Patch (DESKTOP UNCHANGED)
    Paste at END of globals.css
    ========================================================= */
 
-/* 1) Touch devices: remove hover-lift/jitter */
+/* 0) Safety: prevent long words/URLs from busting cards on small screens */
+.card,
+.card-title,
+.card-body {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* 1) Touch devices: remove hover lift/jitter */
 @media (hover: none) and (pointer: coarse) {
   .card:hover {
     transform: none;
@@ -871,202 +878,7 @@ html.js .reveal.visible {
   }
 }
 
-/* 2) Small screens: tighten layout + improve tap targets */
-@media (max-width: 640px) {
-  /* Slightly more breathing room at top under sticky header */
-  .site-header-inner {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-
-  /* Make logo stack nicer */
-  .logo {
-    width: auto;
-    flex: 1;
-    min-width: 0; /* allows text to shrink instead of wrapping */
-  }
-
-
-  .logo-text-main {
-    font-size: 0.95rem;
-  }
-
-  .logo-text-sub {
-    font-size: 0.8rem;
-  }
-
-  /* Nav: make it feel like a mobile "chip row" */
-  .nav-links {
-    width: 100%;
-    justify-content: flex-start;
-    gap: 0.6rem 0.7rem;
-    font-size: 0.95rem;
-  }
-
-  .nav-links a {
-    padding: 0.45rem 0.65rem;
-    border-radius: 999px;
-    background: rgba(15, 23, 42, 0.55);
-    border: 1px solid rgba(148, 163, 184, 0.35);
-    opacity: 1; /* mobile readability */
-  }
-
-  .nav-links a::after {
-    display: none; /* underline is cramped on mobile chips */
-  }
-
-  .nav-active {
-    border-color: rgba(191, 219, 254, 0.85);
-    background: rgba(30, 64, 175, 0.18);
-  }
-
-  /* Buttons: bigger tap targets */
-  .btn,
-  .nav-btn {
-    min-height: 44px; /* Apple HIG tap target */
-  }
-
-  /* Optional: on mobile, make CTA rows feel “stacked SaaS” */
-  .hero-cta-row,
-  .hero-automation-cta-row,
-  .hero-contact-cta-row {
-    gap: 0.7rem;
-  }
-
-  .hero-cta-row .btn,
-  .hero-automation-cta-row .btn,
-  .hero-contact-cta-row .btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* Hero: reduce top/bottom padding so content shows faster */
-  .hero {
-    padding: 2.2rem 0 2.4rem;
-  }
-
-  .hero-title {
-    font-size: clamp(2.05rem, 8.2vw, 2.6rem);
-    line-height: 1.12;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-    margin-bottom: 1.2rem;
-  }
-
-  /* Hero image: keep it “card-like”, not huge */
-  .hero-media {
-    border-radius: 1.2rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero-media img {
-    aspect-ratio: 16 / 10;
-    height: auto;
-  }
-
-  /* Section spacing: less vertical bloat */
-  .section {
-    padding: 0 0 2.4rem;
-  }
-
-  .section-header {
-    margin-bottom: 1.2rem;
-  }
-
-  .section-title {
-    font-size: 1.45rem;
-    line-height: 1.2;
-  }
-
-  .section-subtitle {
-    font-size: 0.98rem;
-    max-width: 100%;
-  }
-
-  /* Cards: slightly tighter padding */
-  .card {
-    padding: 1.05rem 1.05rem;
-    border-radius: 1.05rem;
-  }
-
-  .card-title {
-    font-size: 1.15rem;
-  }
-
-  .card-body {
-    font-size: 0.98rem;
-  }
-
-  .card-list li {
-    font-size: 0.92rem;
-  }
-
-  /* About Mission/Vision grid: ensure clean stack on phones */
-  .about-two-col {
-    grid-template-columns: 1fr !important;
-    max-width: 100% !important;
-  }
-
-  /* Automation + Contact hero panels: prevent weird side gaps */
-  .hero-automation-panel,
-  .hero-contact-panel {
-    width: 100%;
-  }
-
-  /* Contact form: make it feel premium on mobile */
-  .contact-form-card {
-    padding: 0; /* card already has padding */
-  }
-
-  .form-field input,
-  .form-field textarea {
-    font-size: 16px; /* prevents iOS zoom on focus */
-    padding: 0.7rem 0.85rem;
-  }
-
-  .form-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .form-actions .btn {
-    width: 100%;
-  }
-
-  /* Turnstile: keep from squishing */
-  .cf-turnstile {
-    width: 100%;
-    overflow: hidden;
-  }
-}
-
-/* 3) Mid mobile / small tablets: cleaner grids */
-@media (max-width: 768px) {
-  /* Tighter container padding */
-  .container {
-    padding: 0 1.05rem;
-  }
-
-  /* Automation examples scenario picker: 2 columns instead of 4 */
-  .automation-examples-page .card-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 520px) {
-  /* Automation examples scenario picker: 1 column on small phones */
-  .automation-examples-page .card-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-
-/* ===== Mobile header hamburger (desktop unchanged) ===== */
+/* 2) Mobile header hamburger (desktop unchanged) */
 .nav-hamburger {
   display: none;
   color: #e5e7eb;
@@ -1088,6 +900,10 @@ html.js .reveal.visible {
   padding: 0 0 0.9rem;
 }
 
+.nav-mobile-panel.open {
+  display: block;
+}
+
 .nav-links-mobile {
   display: flex;
   flex-direction: column;
@@ -1095,7 +911,33 @@ html.js .reveal.visible {
   padding-top: 0.6rem;
 }
 
+/* 3) Small screens: tighten layout + improve tap targets */
 @media (max-width: 640px) {
+  /* Header row: logo left, hamburger right */
+  .site-header-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+  }
+
+  .logo {
+    width: auto;
+    flex: 1;
+    min-width: 0; /* allows text to shrink instead of wrapping */
+  }
+
+  .logo-text-main {
+    font-size: 0.95rem;
+  }
+
+  .logo-text-sub {
+    font-size: 0.8rem;
+  }
+
+  /* Hide desktop links, show hamburger */
   .nav-links-desktop {
     display: none;
   }
@@ -1106,16 +948,180 @@ html.js .reveal.visible {
     justify-content: center;
   }
 
-  .nav-mobile-panel.open {
-    display: block;
-  }
-
+  /* ✅ MOBILE NAV LINKS: remove "pill chips" */
+  .nav-links a,
   .nav-links-mobile a {
-    padding: 0.25rem 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 0.35rem 0;
+    opacity: 1;
   }
 
-  .nav-links-mobile .nav-btn {
-    width: fit-content;
+  /* Kill the desktop underline animation in mobile contexts */
+  .nav-links a::after {
+    display: none;
+  }
+
+  /* Mobile active state: subtle underline */
+  .nav-active {
+    position: relative;
+  }
+
+  .nav-active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #38bdf8, #a5b4fc);
+  }
+
+  /* Tap targets */
+  .btn,
+  .nav-btn {
+    min-height: 44px;
+  }
+
+  /* CTA rows: stack */
+  .hero-cta-row,
+  .hero-automation-cta-row,
+  .hero-contact-cta-row {
+    gap: 0.7rem;
+  }
+
+  .hero-cta-row .btn,
+  .hero-automation-cta-row .btn,
+  .hero-contact-cta-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Hero: faster content appearance */
+  .hero {
+    padding: 2.2rem 0 2.4rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.05rem, 8.2vw, 2.6rem);
+    line-height: 1.12;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-media {
+    border-radius: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-media img {
+    aspect-ratio: 16 / 10;
+    height: auto;
+  }
+
+  /* Sections: reduce vertical bloat */
+  .section {
+    padding: 0 0 2.4rem;
+  }
+
+  .section-header {
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title {
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-size: 0.98rem;
+    max-width: 100%;
+  }
+
+  /* Cards: slightly tighter */
+  .card {
+    padding: 1.05rem;
+    border-radius: 1.05rem;
+  }
+
+  .card-title {
+    font-size: 1.15rem;
+  }
+
+  .card-body {
+    font-size: 0.98rem;
+  }
+
+  .card-list li {
+    font-size: 0.92rem;
+  }
+
+  /* About Mission/Vision: stack */
+  .about-two-col {
+    grid-template-columns: 1fr !important;
+    max-width: 100% !important;
+  }
+
+  /* Panels: avoid odd side gaps */
+  .hero-automation-panel,
+  .hero-contact-panel {
+    width: 100%;
+  }
+
+  /* Contact form: mobile containment + nicer button */
+  .contact-form-card {
+    padding: 1rem !important; /* restore padding on mobile */
+    overflow: hidden;
+  }
+
+  .contact-form,
+  .form-row,
+  .form-field {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .form-field input,
+  .form-field textarea {
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    font-size: 16px; /* prevents iOS zoom */
+    padding: 0.7rem 0.85rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+    max-width: 360px; /* “SaaS” button */
+    margin: 0 auto;
+  }
+
+  .form-note {
+    text-align: center;
+    max-width: 28rem;
+  }
+
+  /* Turnstile: don’t squish */
+  .cf-turnstile {
+    width: 100%;
+    overflow: hidden;
+  }
+}
+
+/* 4) Mid mobile / small tablets */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.05rem;
   }
 }
 
@@ -1137,14 +1143,6 @@ html.js .reveal.visible {
   }
 }
 
-/* Prevent long words from busting cards on mobile */
-.card,
-.card-body,
-.card-title {
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
 /* Automation Examples – scenario picker responsive grid */
 .ae-scenario-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1162,44 +1160,3 @@ html.js .reveal.visible {
   }
 }
 
-/* ===== Contact form: mobile containment + nicer button ===== */
-@media (max-width: 640px) {
-  /* Put padding BACK on the card on mobile */
-  .contact-form-card {
-    padding: 1rem !important;          /* restores card padding */
-    overflow: hidden;                  /* prevents any visual overflow */
-  }
-
-  /* Make every layout wrapper respect the card width */
-  .contact-form,
-  .form-row,
-  .form-field {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Hard-force inputs/textarea to stay inside */
-  .form-field input,
-  .form-field textarea {
-    width: 100%;
-    max-width: 100%;
-    display: block;
-  }
-
-  /* Button: smaller + centered (instead of huge full-width) */
-  .form-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .form-actions .btn {
-    width: 100%;
-    max-width: 360px;                  /* smaller “SaaS” button */
-    margin: 0 auto;
-  }
-
-  .form-note {
-    text-align: center;
-    max-width: 28rem;
-  }
-}

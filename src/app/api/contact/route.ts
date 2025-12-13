@@ -53,7 +53,7 @@ export async function POST(req: Request) {
       );
     }
 
-    // Verify Turnstile
+    // Verify Turnstile token
     const formData = new FormData();
     formData.append("secret", secret);
     formData.append("response", turnstileToken);
@@ -80,13 +80,14 @@ export async function POST(req: Request) {
     }
 
     const resendKey = process.env.RESEND_API_KEY;
-    const toEmail = process.env.CONTACT_TO_EMAIL;     // where YOU receive inquiries
+    const toEmail = process.env.CONTACT_TO_EMAIL; // where YOU receive inquiries
     const fromEmail = process.env.CONTACT_FROM_EMAIL; // e.g. "Stonebranch Capital <no-reply@stonebranchcapital.com>"
-    const siteUrl = (process.env.SITE_URL || "https://stonebranchcapital.com").replace(/\/$/, "");
+    const replyToEmail = process.env.CONTACT_REPLYTO_EMAIL || toEmail; // where customer replies go
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://stonebranchcapital.com";
 
-    if (!resendKey || !toEmail || !fromEmail) {
+    if (!resendKey || !toEmail || !fromEmail || !replyToEmail) {
       return NextResponse.json(
-        { ok: false, error: "Server missing email configuration (.env.local / Vercel env)." },
+        { ok: false, error: "Server missing email configuration (.env.local)." },
         { status: 500 }
       );
     }
@@ -97,10 +98,10 @@ export async function POST(req: Request) {
     const location = (body.location ?? "").trim();
     const systems = (body.systems ?? "").trim();
 
-    // ---------------------------
-    // 1) INTERNAL EMAIL (to you)
-    // ---------------------------
-    const internalSubject = `New Stonebranch inquiry — ${name}${business ? ` (${business})` : ""}`;
+    // 1) INTERNAL NOTIFICATION (to you)
+    const internalSubject = `New Stonebranch inquiry — ${name}${
+      business ? ` (${business})` : ""
+    }`;
 
     const internalText = [
       `Name: ${name}`,
@@ -119,89 +120,108 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: fromEmail,
       to: [toEmail],
-      replyTo: email, // so you can hit reply and it goes to the customer
+      replyTo: email, // ✅ so YOU can just hit Reply
       subject: internalSubject,
       text: internalText,
     });
 
-    // -----------------------------------------
-    // 2) CUSTOMER AUTO-REPLY (to the customer)
-    // -----------------------------------------
-    const customerSubject = `Got your message — Stonebranch Capital`;
+    // 2) CUSTOMER AUTO-REPLY (to them)
+    const examplesUrl = `${siteUrl}/automation-examples`;
 
-    const safeName = escapeHtml(name.split(" ")[0] || name);
-    const logoUrl = `${siteUrl}/sbc-logo.png`; // from your /public folder
+    const customerSubject = "We received your message — Stonebranch Capital";
 
     const customerText = [
-      `Hey ${name},`,
+      `Hi ${name},`,
       "",
-      `Got your message — thanks for reaching out.`,
-      `I’ll take a look and get back to you soon.`,
+      "Thanks for reaching out — I’ve received your message and will personally review it.",
       "",
-      `If you want, you can reply to this email with anything helpful like:`,
-      `• your service area`,
-      `• what you’re trying to improve (leads, scheduling, follow-up, etc.)`,
-      `• what tools you’re currently using`,
+      "We work with a small number of businesses at a time, so responses aren’t automated or rushed.",
+      "You can expect a thoughtful reply once I’ve had time to look over what you shared.",
       "",
-      `— Josh`,
-      `Founder, Stonebranch Capital`,
-      `${siteUrl}`,
+      "While you’re waiting, you may find this helpful:",
+      `A few real examples of how we help businesses simplify operations and reduce manual work:`,
+      examplesUrl,
+      "",
+      "No pressure to reply again unless you want to add context — your original message came through clearly.",
+      "",
+      "Best,",
+      "Josh Doms",
+      "Founder, Stonebranch Capital LLC",
+      "Charleston, SC",
+      "",
+      "—",
+      "If you didn’t intend to contact Stonebranch, you can safely ignore this email.",
     ].join("\n");
 
+    const safeName = escapeHtml(name);
+
     const customerHtml = `
-      <div style="font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji','Segoe UI Emoji'; color:#0f172a; line-height:1.45;">
-        <div style="max-width:640px; margin:0 auto; padding:24px;">
-          
-          <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
-            <img src="${logoUrl}" width="44" height="44" alt="Stonebranch Capital" style="border-radius:999px; display:block;" />
-            <div>
-              <div style="font-weight:700; font-size:14px; letter-spacing:0.2px;">Stonebranch Capital</div>
-              <div style="font-size:12px; color:#475569;">Message received</div>
-            </div>
-          </div>
-
-          <div style="font-size:16px; margin:0 0 12px 0;">
-            Hey ${safeName},
-          </div>
-
-          <div style="font-size:16px; margin:0 0 12px 0;">
-            Got your message — thanks for reaching out. I’ll take a look and get back to you soon.
-          </div>
-
-          <div style="font-size:14px; color:#334155; margin:16px 0 14px 0;">
-            If you want to speed things up, just reply to this email with:
-            <ul style="margin:8px 0 0 18px; padding:0;">
-              <li>your service area</li>
-              <li>what you’re trying to improve (leads, scheduling, follow-up, etc.)</li>
-              <li>what tools you’re currently using (if any)</li>
-            </ul>
-          </div>
-
-          <div style="margin-top:18px;">
-            <a href="${siteUrl}" style="display:inline-block; background:#1e40af; color:#ffffff; text-decoration:none; padding:10px 14px; border-radius:10px; font-weight:600; font-size:14px;">
-              Visit stonebranchcapital.com
-            </a>
-          </div>
-
-          <div style="margin-top:18px; font-size:14px; color:#0f172a;">
-            — Josh<br/>
-            <span style="color:#475569;">Founder, Stonebranch Capital</span>
-          </div>
-
-          <div style="margin-top:18px; font-size:12px; color:#64748b;">
-            If images are blocked, this email still works — the important info is all text.
-          </div>
-        </div>
+<div style="background:#0b1025;padding:24px 0;margin:0;">
+  <div style="max-width:640px;margin:0 auto;background:#0b1220;border:1px solid rgba(30,64,175,0.35);border-radius:16px;overflow:hidden;">
+    <div style="padding:22px 22px 10px 22px;">
+      <div style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#a5b4fc;opacity:0.9;">
+        Stonebranch Capital LLC
       </div>
-    `;
+      <h1 style="margin:10px 0 0 0;font-size:20px;line-height:1.35;color:#e5e7eb;font-weight:650;">
+        We received your message
+      </h1>
+    </div>
+
+    <div style="padding:18px 22px 22px 22px;color:#e5e7eb;font-size:15px;line-height:1.65;">
+      <p style="margin:0 0 14px 0;">Hi ${safeName},</p>
+
+      <p style="margin:0 0 14px 0;">
+        Thanks for reaching out — I’ve received your message and will personally review it.
+      </p>
+
+      <p style="margin:0 0 14px 0;">
+        We work with a small number of businesses at a time, so responses aren’t automated or rushed.
+        You can expect a thoughtful reply once I’ve had time to look over what you shared.
+      </p>
+
+      <p style="margin:18px 0 10px 0;color:#d1d5db;">
+        While you’re waiting, you may find this helpful:
+      </p>
+
+      <div style="margin:12px 0 18px 0;padding:14px 14px;border-radius:14px;border:1px solid rgba(148,163,184,0.25);background:rgba(15,23,42,0.55);">
+        <div style="font-size:14px;color:#e5e7eb;margin:0 0 10px 0;">
+          A few real examples of how we help businesses simplify operations and reduce manual work.
+        </div>
+
+        <a href="${examplesUrl}"
+           style="display:inline-block;text-decoration:none;background:linear-gradient(135deg,#38bdf8,#4f46e5);color:#0b1025;font-weight:700;padding:10px 14px;border-radius:999px;font-size:14px;">
+          View automation examples
+        </a>
+      </div>
+
+      <p style="margin:0 0 16px 0;color:#d1d5db;">
+        No pressure to reply again unless you want to add context — your original message came through clearly.
+      </p>
+
+      <p style="margin:0;">
+        Best,<br />
+        <strong style="color:#e5e7eb;">Josh Doms</strong><br />
+        <span style="color:#9ca3af;">Founder, Stonebranch Capital LLC</span><br />
+        <span style="color:#9ca3af;">Charleston, SC</span>
+      </p>
+
+      <hr style="border:none;border-top:1px solid rgba(148,163,184,0.25);margin:18px 0;" />
+
+      <p style="margin:0;font-size:12.5px;line-height:1.5;color:#9ca3af;">
+        If you didn’t intend to contact Stonebranch, you can safely ignore this email.
+      </p>
+    </div>
+  </div>
+</div>
+`.trim();
 
     await resend.emails.send({
       from: fromEmail,
       to: [email],
-      replyTo: toEmail, // customer hitting Reply goes to your inbox (contact@...)
+      replyTo: replyToEmail, // ✅ replies go to your inbox
       subject: customerSubject,
-      text: customerText, // inbox-safe fallback
-      html: customerHtml, // polished version
+      text: customerText, // ✅ readable even with images blocked
+      html: customerHtml, // ✅ polished but still “quiet”
     });
 
     return NextResponse.json({ ok: true });

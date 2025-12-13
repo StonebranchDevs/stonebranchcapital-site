@@ -241,7 +241,7 @@ export default function AutomationExamplesPage() {
   );
 
   const [activeScenario, setActiveScenario] = useState<ScenarioId>("lead");
-  const [mode, setMode] = useState<"before" | "after">("after");
+  const [mode, setMode] = useState<"before" | "after">("before");
   const [stepIndex, setStepIndex] = useState(0);
 
   const scenario = useMemo(

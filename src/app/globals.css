@@ -504,7 +504,7 @@ button.btn:focus-visible {
 }
 
 .automation-band {
-  padding-top: 3.3rem;
+  padding-top: 4.5rem;
   padding-bottom: 3.5rem;
   border-top: 1px solid rgba(30, 64, 175, 0.6);
   border-bottom: 1px solid rgba(30, 64, 175, 0.6);
@@ -515,18 +515,26 @@ button.btn:focus-visible {
   margin-top: 4rem;
 }
 
+/* ✅ Give grids inside “band” sections breathing room from the top border */
+.section-band .card-grid,
+.ventures-band .card-grid,
+.automation-band .card-grid {
+  margin-top: 1.25rem;
+}
+
+
 /* About page – Mission / Vision layout */
 .about-two-col {
-  max-width: 1300px;            /* controls overall width */
-  margin: 0 auto;              /* centers the grid */
+  max-width: 1300px;                  /* controls overall width */
+  margin: 1.25rem auto 0;             /* ✅ top margin + centered */
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: stretch;        /* forces equal height cards */
+  align-items: stretch;               /* forces equal height cards */
 }
 
 
 /* ===== Automation page layout ===== */
 .automation-page .hero-automation {
-  padding-top: 6rem; /* single source of truth */
+  padding-top: 4rem; /* single source of truth */
 }
 
 
@@ -1027,6 +1035,11 @@ html.js .reveal.visible {
   /* Sections: reduce vertical bloat */
   .section {
     padding: 0 0 2.4rem;
+  }
+
+  .section.automation-band {
+    padding-top: 3.2rem;
+    padding-bottom: 2.8rem;
   }
 
   .section-header {

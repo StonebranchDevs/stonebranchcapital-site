@@ -262,40 +262,65 @@ export default function AutomationExamplesPage() {
 
       <main>
         {/* HERO */}
-        <section className="section reveal" style={{ paddingTop: "3.2rem" }}>
+        <section className="section hero-automation reveal" style={{ paddingTop: "3.2rem" }}>
           <div className="container">
-            <div className="section-header">
-              <div className="section-kicker">Automation examples</div>
-              <h1 className="section-title">
-                What automation looks like in a real service business.
-              </h1>
-              <p className="section-subtitle" style={{ maxWidth: "46rem" }}>
-                These are representative workflows using simulated data. The goal is to
-                show what automation can look like when it’s a good fit: reducing missed
-                messages, improving follow-up consistency, and cutting repetitive admin —
-                without turning your business into a black box.
-              </p>
+            <div className="hero-automation-inner">
+              {/* LEFT: HERO COPY */}
+              <div>
+                <div className="section-header" style={{ marginBottom: 0 }}>
+                  <div className="section-kicker">Automation examples</div>
+                  <h1 className="section-title">
+                    What automation looks like in a real service business.
+                  </h1>
+                  <p className="section-subtitle" style={{ maxWidth: "46rem" }}>
+                    These are representative workflows using simulated data. The goal is to
+                    show what automation can look like when it’s a good fit: reducing missed
+                    messages, improving follow-up consistency, and cutting repetitive admin —
+                    without turning your business into a black box.
+                  </p>
 
-              <div style={{ marginTop: "1rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-                <Link href="/automation" className="btn btn-outline">
-                  Back to Business Assistance
-                </Link>
-                <Link href="/contact" className="btn btn-primary">
-                  Talk to Stonebranch
-                </Link>
+                  <div
+                    style={{
+                      marginTop: "1rem",
+                      display: "flex",
+                      gap: "0.75rem",
+                      flexWrap: "wrap",
+                    }}
+                  >
+                    <Link href="/automation" className="btn btn-outline">
+                      Back to Business Assistance
+                    </Link>
+                    <Link href="/contact" className="btn btn-primary">
+                      Talk to Stonebranch
+                    </Link>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="card" style={{ marginTop: "1.25rem" }}>
-              <div className="card-tag">How we build (the guardrails)</div>
-              <ul className="card-list">
-                <li><strong>Fit-first:</strong> We only recommend automations that match your workflow and capacity.</li>
-                <li><strong>Human-in-the-loop:</strong> You stay in control — critical steps can require review/approval.</li>
-                <li><strong>Data-minimal:</strong> We use only what’s needed for the agreed purpose, nothing “just in case.”</li>
-                <li><strong>Privacy-minded:</strong> No training on your data without explicit consent. Access is least-privilege.</li>
-              </ul>
+
+              {/* RIGHT: PANEL CARD */}
+              <aside className="hero-automation-panel">
+                <div className="card" style={{ marginTop: 0 }}>
+                  <div className="card-tag">How we build (the guardrails)</div>
+                  <ul className="card-list">
+                    <li>
+                      <strong>Fit-first:</strong> We only recommend automations that match your workflow and capacity.
+                    </li>
+                    <li>
+                      <strong>Human-in-the-loop:</strong> You stay in control — critical steps can require review/approval.
+                    </li>
+                    <li>
+                      <strong>Data-minimal:</strong> We use only what’s needed for the agreed purpose, nothing “just in case.”
+                    </li>
+                    <li>
+                      <strong>Privacy-minded:</strong> No training on your data without explicit consent. Access is least-privilege.
+                    </li>
+                  </ul>
+                </div>
+              </aside>
             </div>
           </div>
         </section>
+
 
         {/* SCENARIO PICKER */}
         <section className="section reveal">

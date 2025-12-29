@@ -29,6 +29,8 @@ export default function RootLayout({
         <RevealInit />
 
         {children}
+
+        <Analytics />
       </body>
     </html>
   );

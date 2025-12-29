@@ -1346,3 +1346,104 @@ html.js .reveal.visible {
   transition-delay: 0.08s;
 }
 
+
+
+/* =========================
+   Postcard Attention Hooks
+   ========================= */
+
+/* Attention strip (sits above hero headline) */
+.attention-strip {
+  display: inline-block;
+  background: linear-gradient(90deg, #2ae3fd, #09a4e4);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.55rem 0.9rem;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+/* Scan-first bullet points (mobile-friendly) */
+.scan-points {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0.75rem;
+}
+
+.scan-points li {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.scan-points li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent-color, #09a4e4);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Immediate benefit line */
+.outcome-line {
+  font-weight: 600;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  margin-bottom: 1.25rem;
+}
+
+/* =========================
+   Mobile Retention Tweaks
+   ========================= */
+
+@media (max-width: 768px) {
+
+  /* Make hero feel tighter & more intentional */
+  .hero-automation {
+    padding-top: 3rem;
+  }
+
+  /* Hide side card on mobile to reduce cognitive load */
+  .hero-automation-panel {
+    display: none;
+  }
+
+  /* Slightly larger headline for mobile punch */
+  .hero-automation-copy .section-title {
+    font-size: 1.9rem;
+    line-height: 1.15;
+  }
+
+  /* CTA buttons stack more comfortably */
+  .hero-automation-cta-row {
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+  }
+
+  .hero-automation-cta-row .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* =========================
+   Optional Micro-Polish
+   ========================= */
+
+/* Subtle CTA attention pulse (very restrained) */
+@keyframes soft-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.postcard-qr-page .btn-primary {
+  animation: soft-pulse 5s ease-in-out infinite;
+}
+

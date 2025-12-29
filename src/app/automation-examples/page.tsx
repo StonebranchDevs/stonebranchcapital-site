@@ -273,12 +273,11 @@ export default function AutomationExamplesPage() {
                     What automation looks like in a real service business.
                   </h1>
                   <p className="section-subtitle" style={{ maxWidth: "46rem" }}>
-                    These are representative workflows using simulated data. The goal is to
-                    show what automation can look like when it’s a good fit: reducing missed
-                    messages, improving follow-up consistency, and cutting repetitive admin —
-                    without turning your business into a black box.
+                      These are representative workflows using simulated data. The goal is to
+                      show patterns — not define limits — for how automation can support a real
+                      service business: reducing missed messages, improving follow-up consistency,
+                      and cutting repetitive admin without turning your operation into a black box.
                   </p>
-
                   <div
                     style={{
                       marginTop: "1rem",
@@ -329,7 +328,8 @@ export default function AutomationExamplesPage() {
               <div className="section-kicker">Choose a scenario</div>
               <h2 className="section-title">Pick what matters most right now.</h2>
               <p className="section-subtitle">
-                Click a scenario to see the before/after and walk through the steps.
+                Click a scenario to explore a common starting point. Each one represents
+                a broader class of workflows that can usually be automated together.
               </p>
             </div>
 
@@ -438,6 +438,10 @@ export default function AutomationExamplesPage() {
                     The point isn’t buzzwords — it’s reducing the number of things that can slip
                     through the cracks, while keeping a human in control of anything that's sensitive.
                   </p>
+                  <p className="card-body" style={{ marginTop: "0.6rem", opacity: 0.9 }}>
+                    In practice, these improvements often unlock additional automation
+                    opportunities once the core workflow is in place.
+                  </p>
                 </div>
               </div>
             </div>
@@ -537,7 +541,9 @@ export default function AutomationExamplesPage() {
                   </div>
 
                   <p className="card-body" style={{ marginTop: "0.9rem" }}>
-                    Want this mapped to your exact workflow? We’ll keep it simple and build around how you already operate.
+                    Want this mapped to your exact workflow? We’ll start with what matters
+                    most, then expand automation only where it actually helps — always
+                    building around how you already operate.
                   </p>
 
                   <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
@@ -564,7 +570,11 @@ export default function AutomationExamplesPage() {
                 Send a quick note about what you do, where leads come from, and what feels
                 messy or manual. We’ll reply with an honest recommendation and a simple plan.
               </p>
-
+              <p className="card-body" style={{ maxWidth: "46rem", opacity: 0.9 }}>
+                If something in your business feels manual, fragile, or overly dependent
+                on memory, it’s likely a candidate for automation — even if it doesn’t
+                look exactly like the examples above.
+              </p>
               <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginTop: "0.8rem" }}>
                 <Link href="/contact" className="btn btn-primary">
                   Contact Stonebranch

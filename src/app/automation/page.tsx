@@ -23,7 +23,8 @@ export default function Automation() {
                 <p className="section-subtitle">
                   We help small and service-based businesses improve lead intake, response consistency,
                   scheduling flow, and reduce repetitive admin tasks — without turning your operation
-                  into something you don’t recognize.
+                  into something you don’t recognize. Our role is to identify where systems break down
+                  and design automation around how your business actually operates.
                 </p>
 
                 <div className="hero-automation-cta-row">
@@ -113,13 +114,18 @@ export default function Automation() {
         <section className="section automation-band reveal" id="automation-examples">
           <div className="container">
             <div className="section-header">
-              <div className="section-kicker">What we automate</div>
+              <div className="section-kicker">Where Automation Usually Helps First</div>
               <h2 className="section-title">
                 Practical automations that actually help you run the business.
               </h2>
               <p className="section-subtitle">
                 We focus on the workflows that reduce missed messages, tighten follow-up,
                 and make scheduling more consistent — so the business runs smoother day to day.
+              </p>
+              <p className="section-note">
+                These are common starting points — not a full list of what’s possible.
+                Every business has different pressure points, and automation can extend
+                far beyond what’s shown here.
               </p>
             </div>
 
@@ -223,6 +229,10 @@ export default function Automation() {
                 We can work project-by-project or in a phased way. The goal is to create systems
                 that feel like an extension of how you already operate — not something that
                 makes your day more complicated.
+              </p>
+              <p className="section-note">
+                Some projects are small and focused. Others expand as new opportunities
+                are uncovered — we adapt the approach as your systems evolve.
               </p>
             </div>
           </div>

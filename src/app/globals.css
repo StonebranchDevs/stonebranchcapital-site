@@ -1355,15 +1355,36 @@ html.js .reveal.visible {
 /* Attention strip (sits above hero headline) */
 .attention-strip {
   display: inline-block;
-  background: linear-gradient(90deg, #2ae3fd, #09a4e4);
-  color: #000;
+
+  /* Slightly darker, more readable gradient */
+  background: linear-gradient(
+    90deg,
+    #09a4e4,
+    #3b82f6
+  );
+
+  color: #ffffff;
   font-weight: 700;
-  font-size: 0.85rem;
-  padding: 0.55rem 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.25;
+
+  padding: 0.6rem 0.95rem;
   border-radius: 6px;
   margin-bottom: 0.75rem;
+
   letter-spacing: 0.02em;
+
+  /* Subtle definition instead of glow */
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
+
+@media (max-width: 480px) {
+  .attention-strip {
+    font-size: 0.85rem;
+    padding: 0.55rem 0.85rem;
+  }
+}
+
 
 /* Scan-first bullet points (mobile-friendly) */
 .scan-points {
@@ -1447,3 +1468,21 @@ html.js .reveal.visible {
   animation: soft-pulse 5s ease-in-out infinite;
 }
 
+/* Card CTA layout */
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+}
+
+.card-link-subtle {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  text-decoration: none;
+}
+
+.card-link-subtle:hover {
+  opacity: 1;
+  text-decoration: underline;
+}

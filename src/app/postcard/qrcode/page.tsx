@@ -190,15 +190,21 @@ export default function PostcardQRPage() {
                 <div className="card-tag">Talk</div>
                 <h3 className="card-title">Ask a quick question</h3>
                 <p className="card-body">
-                  No sales pressure — just a conversation about where things
+                  No sales pressure — just a quick conversation about where things
                   feel messy and whether systems could help.
                 </p>
-                <a
-                  href="mailto:contact@stonebranchcapital.com"
-                  className="card-link"
-                >
-                  Email Stonebranch →
-                </a>
+                <div className="card-actions">
+                  <Link href="/contact" className="card-link">
+                    Use the contact form →
+                  </Link>
+
+                  <a
+                    href="mailto:contact@stonebranchcapital.com"
+                    className="card-link card-link-subtle"
+                  >
+                    Or email us directly
+                  </a>
+                </div>
               </article>
             </div>
           </div>

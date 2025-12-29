@@ -168,6 +168,25 @@ button.btn:focus-visible {
   width: 100%;
 }
 
+
+/* =========================
+   Postcard-specific tweaks
+   ========================= */
+
+.postcard-header {
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+}
+
+.postcard-footer {
+  margin-top: 4rem;
+}
+
+.postcard-qr-page .hero-automation {
+  padding-top: 4.5rem; /* extra breathing room */
+}
+
+
 /* ===== Buttons ===== */
 .btn {
   border-radius: 999px;
@@ -1192,5 +1211,138 @@ html.js .reveal.visible {
   .ae-scenario-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+
+
+
+/* =========================
+   Postcard QR Landing Page
+   ========================= */
+
+.postcard-layout {
+  min-height: 100vh;
+  background: radial-gradient(
+    circle at top,
+    rgba(9, 164, 228, 0.08),
+    transparent 60%
+  );
+}
+
+.qr-page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+.qr-hero h1 {
+  font-size: clamp(2.1rem, 4vw, 2.8rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.qr-hero span {
+  color: #09a4e4;
+}
+
+.qr-subheadline {
+  font-size: 1.05rem;
+  max-width: 680px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.qr-problems {
+  margin-top: 3rem;
+}
+
+.qr-problems ul {
+  list-style: none;
+  padding: 0;
+}
+
+.qr-problems li {
+  padding-left: 1.4rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.qr-problems li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #09a4e4;
+}
+
+.qr-emphasis {
+  margin-top: 1.5rem;
+  font-weight: 600;
+}
+
+.qr-solution {
+  margin-top: 3.5rem;
+}
+
+.qr-actions {
+  margin-top: 4rem;
+}
+
+.qr-links {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.qr-link {
+  display: inline-block;
+  padding: 0.9rem 1.25rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.qr-link:hover {
+  transform: translateY(-1px);
+}
+
+.qr-link.primary {
+  background: #09a4e4;
+  color: #000;
+}
+
+.qr-link.subtle {
+  border: none;
+  opacity: 0.75;
+}
+
+.qr-footer {
+  margin-top: 4rem;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+
+/* =========================
+   Postcard Hero Motion
+   ========================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-float.reveal-active {
+  transform: translateY(-2px);
+}
+
+.reveal-stagger .reveal-active {
+  transition-delay: 0.08s;
 }
 

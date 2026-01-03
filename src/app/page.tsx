@@ -1,7 +1,10 @@
 // src/app/page.tsx
+"use client";
+
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { events } from "@/lib/events";
 
 export default function HomePage() {
   return (
@@ -28,10 +31,28 @@ export default function HomePage() {
                 </p>
 
                 <div className="hero-cta-row">
-                  <Link href="/automation" className="btn btn-primary">
+                  <Link 
+                    href="/automation" 
+                    className="btn btn-primary"
+                    onClick={() =>
+                      events.cta({
+                        section: "hero",
+                        label: "view-automation",
+                      })
+                    }                      
+                  >
                     Explore business assistance
                   </Link>
-                  <Link href="/ventures" className="btn btn-outline">
+                  <Link 
+                    href="/ventures" 
+                    className="btn btn-outline"
+                    onClick={() =>
+                      events.cta({
+                        section: "hero",
+                        label: "view-ventures",
+                      })
+                    }                    
+                  >
                     View active ventures
                   </Link>
                 </div>
@@ -79,7 +100,16 @@ export default function HomePage() {
                   <li>Driveway &amp; sidewalk add-ons</li>
                   <li>Modern booking and reminders</li>
                 </ul>
-                <Link href="/ventures" className="card-link">
+                <Link 
+                  href="/ventures" 
+                  className="card-link"
+                    onClick={() =>
+                      events.nav({
+                        section: "cards",
+                        destination: "ventures",
+                      })
+                    }                    
+                  >
                   View in Business Ventures →
                 </Link>
               </article>
@@ -96,7 +126,16 @@ export default function HomePage() {
                   <li>Scheduling &amp; reminder flows</li>
                   <li>Review &amp; reputation systems</li>
                 </ul>
-                <Link href="/automation" className="card-link">
+                <Link 
+                  href="/automation" 
+                  className="card-link"
+                    onClick={() =>
+                      events.nav({
+                        section: "cards",
+                        destination: "automation",
+                      })
+                    }
+                >
                   Explore automation services →
                 </Link>
               </article>
@@ -113,7 +152,16 @@ export default function HomePage() {
                   <li>Spin-off brands under one umbrella</li>
                   <li>Room to grow without re-starting</li>
                 </ul>
-                <Link href="/about" className="card-link">
+                <Link 
+                  href="/about" 
+                  className="card-link"
+                    onClick={() =>
+                      events.cta({
+                        section: "cards",
+                        label: "learn-more-about",
+                      })
+                    }                  
+                  >
                   Learn more about Stonebranch →
                 </Link>
               </article>

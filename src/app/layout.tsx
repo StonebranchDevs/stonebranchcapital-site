@@ -2,7 +2,9 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
+
 import RevealInit from "@/components/RevealInit";
+import CookieBanner from "@/components/CookieBanner";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
@@ -13,13 +15,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body>
-        {/* Cloudflare Turnstile (needed for Contact page spam check) */}
+        {/* Cloudflare Turnstile (Contact page spam protection) */}
         <Script
           src="https://challenges.cloudflare.com/turnstile/v0/api.js"
           strategy="afterInteractive"
@@ -28,8 +30,13 @@ export default function RootLayout({
         {/* Scroll-reveal initializer */}
         <RevealInit />
 
+        {/* App content */}
         {children}
 
+        {/* Cookie consent + gated analytics */}
+        <CookieBanner />
+
+        {/* Vercel Analytics (cookie-less, safe to always load) */}
         <Analytics />
       </body>
     </html>

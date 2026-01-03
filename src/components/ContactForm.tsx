@@ -1,8 +1,9 @@
 // src/components/ContactForm.tsx
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Script from "next/script";
+import { events } from "@/lib/events"; // ✅ ADD (20260102): central events helper
 
 declare global {
   interface Window {
@@ -10,9 +11,9 @@ declare global {
       render: (el: HTMLElement, options: any) => string;
       reset: (widgetId?: string) => void;
     };
+    __TURNSTILE_TOKEN__?: string;
   }
 }
-
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -24,13 +25,24 @@ export default function ContactForm() {
 
   const formRef = useRef<HTMLFormElement | null>(null);
 
+  // ✅ ADD (20260102): track when the form is actually seen
+  useEffect(() => {
+    events.formOpen("contact");
+  }, []);
+
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setMessage("");
 
+    // ✅ ADD(20260102): track submit attempt
+    events.formSubmit("contact");
+
     if (!token) {
       setStatus("error");
       setMessage("Please complete the spam check.");
+
+      // ✅ ADD(20260102): track validation failure
+      events.formError("contact", "missing_turnstile");
       return;
     }
 
@@ -59,7 +71,10 @@ export default function ContactForm() {
       const data = await res.json().catch(() => null);
       setStatus("error");
       setMessage(data?.error || "Something went wrong. Please try again.");
-      // reset token so they re-verify
+
+      // ✅ ADD: track server/API failure
+      events.formError("contact", "api_error");
+
       setToken("");
       try {
         window.turnstile?.reset?.();
@@ -70,6 +85,9 @@ export default function ContactForm() {
     setStatus("success");
     setMessage("Message sent. We’ll get back to you soon.");
 
+    // ✅ ADD: track successful lead
+    events.formSuccess("contact");
+
     form.reset();
     setToken("");
     try {
@@ -79,7 +97,7 @@ export default function ContactForm() {
 
   return (
     <>
-      {/* Turnstile script (client-only, avoids SSR mismatch issues) */}
+      {/* Turnstile script */}
       <Script
         src="https://challenges.cloudflare.com/turnstile/v0/api.js"
         strategy="afterInteractive"
@@ -156,7 +174,7 @@ export default function ContactForm() {
             />
           </div>
 
-          {/* We hook Turnstile callbacks onto window for the widget */}
+          {/* Turnstile callbacks */}
           <Script id="turnstile-callbacks" strategy="afterInteractive">
             {`
               window.onTurnstileSuccess = function (token) {
@@ -171,7 +189,7 @@ export default function ContactForm() {
             `}
           </Script>
 
-          {/* Keep React in sync with the token */}
+          {/* Sync token to React */}
           <Script id="turnstile-token-sync" strategy="afterInteractive">
             {`
               (function(){
@@ -221,9 +239,6 @@ export default function ContactForm() {
 }
 
 function TokenBridge({ onToken }: { onToken: (t: string) => void }) {
-  // Lightweight listener (no extra file)
-  // Reads token from window events dispatched by the script above.
-  // This avoids direct DOM poking + avoids SSR mismatch.
   if (typeof window !== "undefined") {
     window.addEventListener("turnstile-token", (e: any) => {
       onToken(String(e?.detail || ""));

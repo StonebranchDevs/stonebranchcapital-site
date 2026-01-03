@@ -3,6 +3,7 @@
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { events } from "@/lib/events";
 
 export default function Ventures() {
   return (
@@ -65,7 +66,16 @@ export default function Ventures() {
                   </li>
                 </ul>
 
-                <Link href="/about" className="card-link">
+                <Link 
+                  href="/about" 
+                  className="card-link"
+                  onClick={() =>
+                    events.cta({
+                    section: "cards",
+                    label: "build-ventures",
+                    })
+                  }     
+                >
                   How we build durable service ventures →
                 </Link>
               </article>
@@ -103,7 +113,16 @@ export default function Ventures() {
                   </li>
                 </ul>
 
-                <Link href="/automation" className="card-link">
+                <Link 
+                  href="/automation" 
+                  className="card-link"
+                  onClick={() =>
+                    events.cta({
+                    section: "cards",
+                    label: "view-automation",
+                    })
+                  }                   
+                  >
                   Explore automation services →
                 </Link>
               </article>
@@ -141,7 +160,16 @@ export default function Ventures() {
                   </li>
                 </ul>
 
-                <Link href="/about" className="card-link">
+                <Link 
+                  href="/about" 
+                  className="card-link"
+                  onClick={() =>
+                    events.cta({
+                    section: "cards",
+                    label: "explore-initiatives",
+                    })
+                  }                   
+                  >
                   Learn how we explore new initiatives →
                 </Link>
               </article>
@@ -185,8 +213,16 @@ export default function Ventures() {
               </p>
               <p className="card-body">
                 Email{" "}
-                <a href="mailto:contact@stonebranchcapital.com">
-                  <strong>contact@stonebranchcapital.com</strong>
+                <a 
+                  href="mailto:contact@stonebranchcapital.com"
+                  onClick={() =>
+                    events.mailto({
+                      section: "next-step",
+                      label: "ventures-direct",
+                    })
+                  }
+                >
+                  contact@stonebranchcapital.com
                 </a>{" "}
                 with a short overview of your business, what stage you’re in, and what
                 you’re looking for. If it makes sense, we’ll respond with next steps or a

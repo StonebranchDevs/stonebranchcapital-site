@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { events } from "@/lib/events";
 
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -33,14 +34,64 @@ export default function SiteHeader() {
 
           {/* Desktop nav (unchanged behavior) */}
           <nav className="nav-links nav-links-desktop" aria-label="Primary">
-            <Link href="/" className={isActive("/")}>Home</Link>
-            <Link href="/about" className={isActive("/about")}>About</Link>
-            <Link href="/ventures" className={isActive("/ventures")}>Business Ventures</Link>
-            <Link href="/automation" className={isActive("/automation")}>Business Assistance</Link>
+            <Link 
+              href="/" 
+              className={isActive("/")} 
+              onClick={() =>
+                  events.nav({
+                  section: "header",
+                  destination: "home",
+                  })
+              }
+            >
+              Home
+            </Link>
+            <Link 
+              href="/about" 
+              className={isActive("/about")} 
+              onClick={() =>
+                events.nav({
+                section: "header",
+                destination: "about",
+                })
+              }
+            >
+              About
+            </Link>
+            <Link 
+              href="/ventures" 
+              className={isActive("/ventures")} 
+              onClick={() =>
+                events.nav({
+                section: "header",
+                destination: "ventures",
+                })
+              }
+            >
+              Business Ventures
+            </Link>
+            <Link 
+              href="/automation" 
+              className={isActive("/automation")} 
+              onClick={() =>
+                events.nav({
+                section: "header",
+                destination: "automation",
+                })
+              }
+            >
+              Business Assistance
+            </Link>
 
             <Link
               href="/contact"
               className={`btn btn-outline nav-btn ${isActive("/contact")}`}
+              onClick={() =>
+                events.nav({
+                section: "header",
+                destination: "contact",
+                })
+              }
             >
               Contact
             </Link>
@@ -78,13 +129,11 @@ export default function SiteHeader() {
           className={`nav-mobile-panel ${open ? "open" : ""}`}
         >
           <nav className="nav-links nav-links-mobile" aria-label="Mobile">
-            <Link href="/" className={isActive("/")}>Home</Link>
-            <Link href="/about" className={isActive("/about")}>About</Link>
-            <Link href="/ventures" className={isActive("/ventures")}>Business Ventures</Link>
-            <Link href="/automation" className={isActive("/automation")}>Business Assistance</Link>
-            <Link href="/contact" className={`btn btn-outline nav-btn ${isActive("/contact")}`}>
-              Contact
-            </Link>
+            <Link href="/" className={isActive("/")} onClick={() => events.nav({section: "mobile-header", destination: "home"})}>Home</Link>
+            <Link href="/about" className={isActive("/about")} onClick={() => events.nav({section: "mobile-header", destination: "about"})}>About</Link>
+            <Link href="/ventures" className={isActive("/ventures")} onClick={() => events.nav({section: "mobile-header", destination: "ventures"})}>Business Ventures</Link>
+            <Link href="/automation" className={isActive("/automation")} onClick={() => events.nav({section: "mobile-header", destination: "automation"})}>Business Assistance</Link>
+            <Link href="/contact" className={`btn btn-outline nav-btn ${isActive("/contact")}`} onClick={() => events.nav({section: "mobile-header", destination: "contact"})}>Contact</Link>
           </nav>
         </div>
       </div>

@@ -1,6 +1,9 @@
 // src/app/about/page.tsx
+"use client";
+
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { events } from "@/lib/events";
 
 export default function AboutPage() {
   return (
@@ -234,8 +237,16 @@ export default function AboutPage() {
               </p>
               <p className="card-body">
                 Email{" "}
-                <a href="mailto:contact@stonebranchcapital.com">
-                  <strong>contact@stonebranchcapital.com</strong>
+                <a 
+                  href="mailto:contact@stonebranchcapital.com"
+                  onClick={() =>
+                    events.mailto({
+                      section: "next-step",
+                      label: "about-direct",
+                    })
+                  }
+                >
+                  contact@stonebranchcapital.com
                 </a>{" "}
                 with a short note about who you are, what you’re working on, and what you’re
                 looking for. We’ll respond with honest thoughts and, if it makes sense, a simple

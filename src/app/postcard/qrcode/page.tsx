@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
+import { events } from "@/lib/events";
 
 export default function PostcardQRPage() {
 
   useEffect(() => {
     sessionStorage.setItem("traffic_source", "postcard");
+    events.qrLanding();
   }, []);
 
   return (
@@ -52,11 +54,29 @@ export default function PostcardQRPage() {
                 </p>
 
                 <div className="hero-automation-cta-row">
-                  <Link href="/automation-examples" className="btn btn-primary">
+                  <Link
+                    href="/automation-examples"
+                    className="btn btn-primary"
+                    onClick={() =>
+                      events.nav({
+                        section: "hero",
+                        destination: "automation-examples",
+                      })
+                    }
+                  >
                     See how businesses tighten their operations
                   </Link>
 
-                  <Link href="/automation" className="btn btn-outline">
+                  <Link
+                    href="/automation"
+                    className="btn btn-outline"
+                    onClick={() =>
+                      events.nav({
+                        section: "hero",
+                        destination: "automation",
+                      })
+                    }
+                  >
                     Explore automation services
                   </Link>
                 </div>
@@ -169,7 +189,16 @@ export default function PostcardQRPage() {
                   scheduling, follow-ups, reviews, and internal handoffs —
                   without chaos.
                 </p>
-                <Link href="/automation-examples" className="card-link">
+                <Link
+                  href="/automation-examples"
+                  className="card-link"
+                  onClick={() =>
+                    events.nav({
+                      section: "decision-cards",
+                      destination: "automation-examples",
+                    })
+                  }
+                >
                   View automation examples →
                 </Link>
               </article>
@@ -181,7 +210,16 @@ export default function PostcardQRPage() {
                   Learn how our automation and systems work fits into the
                   broader Stonebranch Capital structure.
                 </p>
-                <Link href="/automation" className="card-link">
+                <Link
+                  href="/automation"
+                  className="card-link"
+                  onClick={() =>
+                    events.nav({
+                      section: "decision-cards",
+                      destination: "automation",
+                    })
+                  }
+                >
                   Visit automation page →
                 </Link>
               </article>
@@ -194,13 +232,28 @@ export default function PostcardQRPage() {
                   feel messy and whether systems could help.
                 </p>
                 <div className="card-actions">
-                  <Link href="/contact" className="card-link">
+                  <Link
+                    href="/contact"
+                    className="card-link"
+                    onClick={() =>
+                      events.cta({
+                        section: "decision-cards",
+                        label: "contact-form",
+                      })
+                    }
+                  >
                     Use the contact form →
                   </Link>
 
                   <a
                     href="mailto:contact@stonebranchcapital.com"
                     className="card-link card-link-subtle"
+                    onClick={() =>
+                      events.mailto({
+                        section: "decision-cards",
+                        label: "direct-email",
+                      })
+                    }
                   >
                     Or email us directly
                   </a>

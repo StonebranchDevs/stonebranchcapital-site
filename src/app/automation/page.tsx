@@ -3,6 +3,7 @@
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { events } from "@/lib/events";
 
 export default function Automation() {
   return (
@@ -28,11 +29,29 @@ export default function Automation() {
                 </p>
 
                 <div className="hero-automation-cta-row">
-                  <Link className="btn btn-primary" href="/contact">
+                  <Link 
+                    className="btn btn-primary" 
+                    href="/contact"
+                    onClick={() =>
+                      events.cta({
+                        section: "hero",
+                        label: "contact",
+                      })
+                    }                    
+                    >
                     Schedule a conversation
                   </Link>
 
-                  <Link className="btn btn-outline" href="/automation-examples">
+                  <Link 
+                    className="btn btn-outline" 
+                    href="/automation-examples"
+                    onClick={() =>
+                      events.cta({
+                        section: "hero",
+                        label: "view-automation-examples",
+                      })
+                    }                    
+                  >
                     View real-world scenarios
                   </Link>
                 </div>
@@ -251,10 +270,17 @@ export default function Automation() {
               </p>
               <p className="card-body">
                 Email{" "}
-                <a href="mailto:contact@stonebranchcapital.com">
-                  <strong>contact@stonebranchcapital.com</strong>
+                <a href="mailto:contact@stonebranchcapital.com"
+                    onClick={() =>
+                      events.mailto({
+                        section: "next-step",
+                        label: "automation-direct",
+                      })
+                    }                
+                >
+                  contact@stonebranchcapital.com
                 </a>{" "}
-                with a quick overview of your business, your service area, and what you’d love
+                or use the contact button below, and provide us with a quick overview of your business, your service area, and what you’d love
                 to stop doing manually. We’ll reply with a few time options and a simple way to
                 meet.
               </p>
@@ -262,9 +288,15 @@ export default function Automation() {
               <div className="hero-automation-cta-row" style={{ marginTop: "0.75rem" }}>
                 <a
                   className="btn btn-primary"
-                  href="mailto:contact@stonebranchcapital.com?subject=Stonebranch%20Automation%20Inquiry"
+                  href="/contact"
+                    onClick={() =>
+                      events.cta({
+                        section: "next-step",
+                        label: "contact",
+                      })
+                    }                
                 >
-                  Email Stonebranch about automation
+                  Contact us about automation
                 </a>
               </div>
             </div>

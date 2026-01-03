@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { events } from "@/lib/events";
 
 type ScenarioId = "lead" | "schedule" | "reviews" | "handoff";
 
@@ -286,10 +287,28 @@ export default function AutomationExamplesPage() {
                       flexWrap: "wrap",
                     }}
                   >
-                    <Link href="/automation" className="btn btn-outline">
+                    <Link 
+                      href="/automation" 
+                      className="btn btn-outline"
+                      onClick={() =>
+                        events.nav({
+                          section: "hero",
+                          destination: "automation",
+                        })
+                      }                      
+                    >
                       Back to Business Assistance
                     </Link>
-                    <Link href="/contact" className="btn btn-primary">
+                    <Link 
+                      href="/contact" 
+                      className="btn btn-primary"
+                      onClick={() =>
+                        events.nav({
+                          section: "hero",
+                          destination: "contact",
+                        })
+                      }                       
+                    >
                       Talk to Stonebranch
                     </Link>
                   </div>
@@ -547,10 +566,28 @@ export default function AutomationExamplesPage() {
                   </p>
 
                   <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-                    <Link href="/contact" className="btn btn-primary">
+                    <Link 
+                      href="/contact" 
+                      className="btn btn-primary"
+                      onClick={() =>
+                        events.nav({
+                          section: "walkthrough",
+                          destination: "contact",
+                        })
+                      }                       
+                    >
                       Talk about your workflow
                     </Link>
-                    <Link href="/automation" className="btn btn-outline">
+                    <Link 
+                      href="/automation" 
+                      className="btn btn-outline"
+                      onClick={() =>
+                        events.nav({
+                          section: "walkthrough",
+                          destination: "automation",
+                        })
+                      }                       
+                    >
                       Back to Business Assistance
                     </Link>
                   </div>
@@ -576,12 +613,27 @@ export default function AutomationExamplesPage() {
                 look exactly like the examples above.
               </p>
               <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginTop: "0.8rem" }}>
-                <Link href="/contact" className="btn btn-primary">
+                <Link 
+                  href="/contact" 
+                  className="btn btn-primary"
+                      onClick={() =>
+                        events.nav({
+                          section: "next-step",
+                          destination: "contact",
+                        })
+                      }                   
+                  >
                   Contact Stonebranch
                 </Link>
                 <a
                   href="mailto:contact@stonebranchcapital.com?subject=Stonebranch%20Automation%20Examples%20Inquiry"
                   className="btn btn-outline"
+                  onClick={() =>
+                    events.mailto({
+                      section: "next-step",
+                      label: "automation-examples-direct",
+                    })
+                  }                   
                 >
                   Email directly
                 </a>

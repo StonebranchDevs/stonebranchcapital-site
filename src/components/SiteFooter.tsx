@@ -1,4 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { events } from "@/lib/events";
 
 export default function SiteFooter() {
   const year = new Date().getFullYear();
@@ -22,11 +27,11 @@ export default function SiteFooter() {
 
           {/* Right: Navigation */}
           <div className="footer-links">
-            <Link href="/">Home</Link>
-            <Link href="/about">About</Link>
-            <Link href="/ventures">Ventures</Link>
-            <Link href="/automation">Business Assistance</Link>
-            <Link href="/contact">Contact</Link>
+            <Link href="/" onClick={() => events.nav({section: "footer", destination: "home"})}>Home</Link>
+            <Link href="/about" onClick={() => events.nav({section: "footer", destination: "about"})}>About</Link>
+            <Link href="/ventures" onClick={() => events.nav({section: "footer", destination: "ventures"})}>Ventures</Link>
+            <Link href="/automation" onClick={() => events.nav({section: "footer", destination: "automation"})}>Business Assistance</Link>
+            <Link href="/contact" onClick={() => events.nav({section: "footer", destination: "contact"})}>Contact</Link>
           </div>
         </div>
       </div>

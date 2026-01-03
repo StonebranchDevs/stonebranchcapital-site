@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { events } from "@/lib/events";
 
@@ -27,12 +25,86 @@ export default function SiteFooter() {
 
           {/* Right: Navigation */}
           <div className="footer-links">
-            <Link href="/" onClick={() => events.nav({section: "footer", destination: "home"})}>Home</Link>
-            <Link href="/about" onClick={() => events.nav({section: "footer", destination: "about"})}>About</Link>
-            <Link href="/ventures" onClick={() => events.nav({section: "footer", destination: "ventures"})}>Ventures</Link>
-            <Link href="/automation" onClick={() => events.nav({section: "footer", destination: "automation"})}>Business Assistance</Link>
-            <Link href="/contact" onClick={() => events.nav({section: "footer", destination: "contact"})}>Contact</Link>
+            <Link
+              href="/"
+              onClick={() =>
+                events.nav({ section: "footer", destination: "home" })
+              }
+            >
+              Home
+            </Link>
+            <Link
+              href="/about"
+              onClick={() =>
+                events.nav({ section: "footer", destination: "about" })
+              }
+            >
+              About
+            </Link>
+            <Link
+              href="/ventures"
+              onClick={() =>
+                events.nav({ section: "footer", destination: "ventures" })
+              }
+            >
+              Ventures
+            </Link>
+            <Link
+              href="/automation"
+              onClick={() =>
+                events.nav({ section: "footer", destination: "automation" })
+              }
+            >
+              Business Assistance
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() =>
+                events.nav({ section: "footer", destination: "contact" })
+              }
+            >
+              Contact
+            </Link>
           </div>
+        </div>
+
+        {/* Legal links */}
+        <div className="footer-legal">
+          <Link
+            href="/privacy"
+            onClick={() =>
+              events.nav({
+                section: "footer-legal",
+                destination: "privacy",
+              })
+            }
+          >
+            Privacy Policy
+          </Link>
+          <span style={{ margin: "0 10px" }}>•</span>
+          <Link
+            href="/terms"
+            onClick={() =>
+              events.nav({
+                section: "footer-legal",
+                destination: "terms",
+              })
+            }
+          >
+            Terms of Service
+          </Link>
+          <span style={{ margin: "0 10px" }}>•</span>
+          <Link
+            href="/disclaimer"
+            onClick={() =>
+              events.nav({
+                section: "footer-legal",
+                destination: "disclaimer",
+              })
+            }
+          >
+            Disclaimer
+          </Link>
         </div>
       </div>
     </footer>

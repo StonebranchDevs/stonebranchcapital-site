@@ -17,13 +17,13 @@ export default function AboutPage() {
             <div className="section-header">
               <div className="section-kicker">About Stonebranch</div>
               <h1 className="section-title">
-                Built to create, support, and scale ventures the right way.
+                Built to create, support, and responsibly grow ventures, the right way.
               </h1>
               <p className="section-subtitle">
                 Stonebranch Capital LLC is a small, intentional parent company based in South
-                Carolina. We exist to give our own brands—and select partner businesses—a stable
-                operational foundation, modern customer experience, and systems that support
-                sustainable growth.
+                Carolina. We exist to help provide our own brands—and select partner businesses—
+                with a stable operational foundation, a modern customer experience, and systems 
+                designed to support sustainable growth over time.
               </p>
             </div>
           </div>
@@ -60,8 +60,8 @@ export default function AboutPage() {
                   start from zero; they should inherit what works and improve on it.
                 </p>
                 <p className="card-body">
-                  Stonebranch is especially committed to supporting veteran-owned and early-stage
-                  businesses where access to capital, time, and operational support is limited.
+                  Stonebranch is especially interested in supporting veteran-owned and early-
+                  stage businesses where access to capital, time, and operational support is limited.
                   For select partnerships, we use flexible models—including revenue-share or
                   phased support—so we can align with long-term success instead of loading
                   founders with up-front cost. Any flexible arrangement is scoped, documented, 
@@ -113,7 +113,7 @@ export default function AboutPage() {
                 <div className="card-tag">02</div>
                 <h3 className="card-title">Automation &amp; business systems</h3>
                 <p className="card-body">
-                  We help local businesses modernize how they handle lead intake, scheduling, and customer communication.
+                  We work with local businesses to modernize how they handle lead intake, scheduling, and customer communication.
                  That includes AI-powered intake, follow-up, and internal workflows.
                 </p>
                 <ul className="card-list">
@@ -213,8 +213,8 @@ export default function AboutPage() {
               <h2 className="card-title">Grounded in real-world service and discipline.</h2>
               <p className="card-body">
                 Stonebranch Capital is led by a U.S. military veteran with experience in
-                emergency services, operations, and service-based business development. That
-                background shows up in how we think: clear chains of responsibility, checklists,
+                emergency services, operations, and service-based business development. That 
+                background influences how we think: clear chains of responsibility, checklists,
                 training, and systems that still work on hard days—not just on paper.
               </p>
               <p className="card-body">

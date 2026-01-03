@@ -25,7 +25,7 @@ export default function HomePage() {
 
                 <p className="hero-subtitle">
                   Stonebranch Capital serves as the parent company behind our
-                  service-based businesses and future projects — including Southern
+                  service-based businesses and select future projects — including Southern
                   Elite Bin Cleaning and AI-powered automation services for local
                   businesses.
                 </p>

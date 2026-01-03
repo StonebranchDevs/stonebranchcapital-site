@@ -1511,3 +1511,14 @@ html.js .reveal.visible {
   opacity: 1;
   text-decoration: underline;
 }
+
+.footer-legal {
+  margin-top: 12px;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.footer-legal a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}

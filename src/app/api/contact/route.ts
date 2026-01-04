@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { notifyDiscord } from "@/lib/discord";
+import { explainAlert } from "@/lib/alertExplain";
 
 export const runtime = "nodejs";
 
@@ -22,8 +24,63 @@ function escapeHtml(input: string) {
     .replaceAll("'", "&#039;");
 }
 
+// Ensure alerting can never crash due to randomUUID differences
+function safeUUID() {
+  try {
+    // @ts-ignore - crypto exists in node runtime on Vercel
+    return crypto.randomUUID();
+  } catch {
+    return `fallback-${Date.now()}`;
+  }
+}
+
+function getContext() {
+  return {
+    time: new Date().toISOString(),
+    env: process.env.VERCEL_ENV || "unknown",
+    region: process.env.VERCEL_REGION || "unknown",
+    requestId: process.env.VERCEL_REQUEST_ID || safeUUID(),
+  };
+}
+
+async function alertDiscord(
+  level: "INFO" | "WARN" | "ERROR",
+  title: string,
+  details: Record<string, string | undefined>,
+  explain?: {
+    status?: number;
+    provider?: "resend" | "turnstile" | "server";
+    errorCodes?: string[];
+  }
+) {
+  const ctx = getContext();
+
+  const lines = [
+    `${level === "ERROR" ? "🚨" : level === "WARN" ? "⚠️" : "ℹ️"} **${title}**`,
+    `Time: ${ctx.time}`,
+    `Env: ${ctx.env}`,
+    `Region: ${ctx.region}`,
+    `Request ID: ${ctx.requestId}`,
+    "",
+    ...Object.entries(details)
+      .filter(([, v]) => v)
+      .map(([k, v]) => `${k}: ${v}`),
+  ];
+
+  const explanation = explainAlert({
+    env: ctx.env,
+    region: ctx.region,
+    ...explain,
+  });
+
+  if (explanation) lines.push(explanation);
+
+  await notifyDiscord(lines.join("\n"));
+}
+
 export async function POST(req: Request) {
   try {
+
     const body = (await req.json()) as Partial<ContactPayload>;
 
     const name = (body.name ?? "").trim();
@@ -32,6 +89,16 @@ export async function POST(req: Request) {
     const turnstileToken = (body.turnstileToken ?? "").trim();
 
     if (!name || !email || !help) {
+      await alertDiscord(
+        "WARN",
+        "Contact rejected — missing fields",
+        {
+          Name: name || "(missing)",
+          Email: email || "(missing)",
+        },
+        { status: 400, provider: "server" }
+      );
+
       return NextResponse.json(
         { ok: false, error: "Missing required fields." },
         { status: 400 }
@@ -39,6 +106,13 @@ export async function POST(req: Request) {
     }
 
     if (!turnstileToken) {
+      await alertDiscord(
+        "WARN",
+        "Contact rejected — missing Turnstile token",
+        { Email: email },
+        { status: 400, provider: "turnstile" }
+      );
+
       return NextResponse.json(
         { ok: false, error: "Please complete the spam check." },
         { status: 400 }
@@ -47,6 +121,13 @@ export async function POST(req: Request) {
 
     const secret = process.env.TURNSTILE_SECRET_KEY;
     if (!secret) {
+      await alertDiscord(
+        "ERROR",
+        "Server misconfiguration",
+        { Missing: "TURNSTILE_SECRET_KEY" },
+        { status: 500, provider: "server" }
+      );
+
       return NextResponse.json(
         { ok: false, error: "Server missing TURNSTILE_SECRET_KEY." },
         { status: 500 }
@@ -63,12 +144,47 @@ export async function POST(req: Request) {
       { method: "POST", body: formData }
     );
 
+    // If Turnstile endpoint itself is failing, treat as server-side dependency error
+    if (!verifyRes.ok) {
+      await alertDiscord(
+        "ERROR",
+        "Turnstile verification request failed",
+        {
+          Email: email,
+          HTTP: String(verifyRes.status),
+        },
+        { status: verifyRes.status, provider: "turnstile" }
+      );
+
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "Spam verification is temporarily unavailable. Please try again.",
+        },
+        { status: 502 }
+      );
+    }
+
     const verifyData = (await verifyRes.json()) as {
       success: boolean;
       "error-codes"?: string[];
     };
 
     if (!verifyData.success) {
+      await alertDiscord(
+        "WARN",
+        "Turnstile verification failed",
+        {
+          Email: email,
+          Codes: (verifyData["error-codes"] ?? []).join(", "),
+        },
+        {
+          status: 400,
+          provider: "turnstile",
+          errorCodes: verifyData["error-codes"],
+        }
+      );
+
       return NextResponse.json(
         {
           ok: false,
@@ -83,11 +199,24 @@ export async function POST(req: Request) {
     const toEmail = process.env.CONTACT_TO_EMAIL; // where YOU receive inquiries
     const fromEmail = process.env.CONTACT_FROM_EMAIL; // e.g. "Stonebranch Capital <no-reply@stonebranchcapital.com>"
     const replyToEmail = process.env.CONTACT_REPLYTO_EMAIL || toEmail; // where customer replies go
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://stonebranchcapital.com";
+    const siteUrl =
+      process.env.NEXT_PUBLIC_SITE_URL || "https://stonebranchcapital.com";
 
     if (!resendKey || !toEmail || !fromEmail || !replyToEmail) {
+      await alertDiscord(
+        "ERROR",
+        "Server misconfiguration — email",
+        {
+          RESEND_API_KEY: String(!!resendKey),
+          CONTACT_TO_EMAIL: String(!!toEmail),
+          CONTACT_FROM_EMAIL: String(!!fromEmail),
+          CONTACT_REPLYTO_EMAIL: String(!!replyToEmail),
+        },
+        { status: 500, provider: "server" }
+      );
+
       return NextResponse.json(
-        { ok: false, error: "Server missing email configuration (.env.local)." },
+        { ok: false, error: "Server missing email configuration." },
         { status: 500 }
       );
     }
@@ -117,17 +246,36 @@ export async function POST(req: Request) {
       .filter(Boolean)
       .join("\n");
 
-    await resend.emails.send({
+    const internalResult = await resend.emails.send({
       from: fromEmail,
       to: [toEmail],
-      replyTo: email, // ✅ so YOU can just hit Reply
+      replyTo: email,
       subject: internalSubject,
       text: internalText,
     });
 
+    if (internalResult.error) {
+      console.error("Resend internal email failed:", internalResult.error);
+
+      await alertDiscord(
+        "ERROR",
+        "Internal email failed",
+        {
+          Name: name,
+          Email: email,
+          Reason: internalResult.error.message || "Unknown error",
+        },
+        { status: 500, provider: "resend" }
+      );
+
+      return NextResponse.json(
+        { ok: false, error: "Failed to send message." },
+        { status: 500 }
+      );
+    }
+
     // 2) CUSTOMER AUTO-REPLY (to them)
     const examplesUrl = `${siteUrl}/automation-examples`;
-
     const customerSubject = "We received your message — Stonebranch Capital";
 
     const customerText = [
@@ -215,17 +363,41 @@ export async function POST(req: Request) {
 </div>
 `.trim();
 
-    await resend.emails.send({
+    const customerResult = await resend.emails.send({
       from: fromEmail,
       to: [email],
-      replyTo: replyToEmail, // ✅ replies go to your inbox
+      replyTo: replyToEmail,
       subject: customerSubject,
-      text: customerText, // ✅ readable even with images blocked
-      html: customerHtml, // ✅ polished but still “quiet”
+      text: customerText,
+      html: customerHtml,
     });
 
+    if (customerResult.error) {
+      console.error("Resend auto-reply failed:", customerResult.error);
+
+      await alertDiscord(
+        "WARN",
+        "Auto-reply email failed",
+        {
+          Name: name,
+          Email: email,
+          Reason: customerResult.error.message || "Unknown error",
+        },
+        { status: 500, provider: "resend" }
+      );
+    }
+
     return NextResponse.json({ ok: true });
-  } catch {
+  } catch (err) {
+    console.error("Unexpected contact form error:", err);
+
+    await alertDiscord(
+      "ERROR",
+      "Unhandled contact form error",
+      { Error: err instanceof Error ? err.message : "Unknown" },
+      { status: 500, provider: "server" }
+    );
+
     return NextResponse.json(
       { ok: false, error: "Unexpected error sending message." },
       { status: 500 }
